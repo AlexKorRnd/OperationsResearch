@@ -1,3 +1,26 @@
 <LinearLayout xmlns:android= "http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_text_view"
+        android:id="@+id/title_text_view"
+        android:textSize="@dimen/abc_text_size_headline_material"/>
+
+    <Button
+        android:id="@+id/button_simplex_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_simplex_method"/>
+
+    <Button
+        android:id="@+id/button_transport_problem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_transport_problem"/>
+
+    </LinearLayout>

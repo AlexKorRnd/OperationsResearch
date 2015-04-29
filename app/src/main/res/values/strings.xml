@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">OperationsResearch</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="title_text_view">Какую задачу нужно решить?</string>
+    <string name="button_simplex_method">Симплекс-метод</string>
+    <string name="button_transport_problem">Транспортная задача</string>
+
+    <string name="button_prev">Назад</string>
+    <string name="button_next">Дальше</string>
+
+    <string name="title_activity_simplex_metod_config_quantity_var">Ввод количества переменных в
+        симплекс-таблице
+    </string>
+
+    <string name="title_activity_simplex_method">Для решения задачи укажите ее размерность
+        и способ представления чисел.</string>
+    <string name="quantity_vars_text_view">Количество переменных</string>
+    <string name="quantity_limit_conditions">Число ограничивающих условий</string>
+
     <string name="action_settings">Settings</string>
 </resources>

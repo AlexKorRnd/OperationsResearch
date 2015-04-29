@@ -9,31 +9,33 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class MainActivity extends ActionBarActivity {
+public class SimplexMetodConfigQuantityVar extends ActionBarActivity {
 
-    // объявляем 2 кнопки на главной активити
-    private Button mSimplMethodButton;
-    private Button mTranspProblemButton;
+    private Button mPrevButton;
+    private Button mNextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_simplex_metod_config_quantity_var);
 
-        mSimplMethodButton = (Button) findViewById(R.id.button_simplex_method);
-        mSimplMethodButton.setOnClickListener(new View.OnClickListener() {
+        mPrevButton = (Button) findViewById(R.id.button_prev);
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,
-                        SimplexMetodConfigQuantityVar.class);
+                Intent intent = new Intent(SimplexMetodConfigQuantityVar.this,
+                        MainActivity.class);
                 startActivity(intent);
             }
         });
 
-        mTranspProblemButton = (Button) findViewById(R.id.button_transport_problem);
-        mTranspProblemButton.setOnClickListener(new View.OnClickListener() {
+        mNextButton = (Button) findViewById(R.id.button_next);
+        mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Intent intent = new Intent();
+
+                //TODO: call next activity
 
             }
         });
@@ -43,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_simplex_metod_config_quantity_var, menu);
         return true;
     }
 
