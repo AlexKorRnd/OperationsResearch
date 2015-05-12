@@ -20,6 +20,10 @@
             android:name=".SimplexMetodConfigQuantityVar"
             android:label="@string/title_activity_simplex_metod_config_quantity_var" >
         </activity>
+        <activity
+            android:name=".InputDataSimplexMethod"
+            android:label="@string/title_activity_input_data_simplex_method" >
+        </activity>
     </application>
 
 </manifest>

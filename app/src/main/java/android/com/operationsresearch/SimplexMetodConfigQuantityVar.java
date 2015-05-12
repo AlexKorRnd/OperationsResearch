@@ -33,9 +33,10 @@ public class SimplexMetodConfigQuantityVar extends ActionBarActivity {
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent();
 
-                //TODO: call next activity
+                Intent intent = new Intent(SimplexMetodConfigQuantityVar.this,
+                        InputDataSimplexMethod.class);
+                startActivity(intent);
 
             }
         });
