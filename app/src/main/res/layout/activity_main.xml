@@ -23,4 +23,10 @@
         android:layout_height="wrap_content"
         android:text="@string/button_transport_problem"/>
 
+    <Button
+        android:id="@+id/button_graph_problem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_graph_problem"/>
+
     </LinearLayout>

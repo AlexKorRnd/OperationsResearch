@@ -1,5 +1,6 @@
 package android.com.operationsresearch;
 
+import android.com.operationsresearch.GraphTask.ActivityInputQuantityNodes;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
     // объявляем 2 кнопки на главной активити
     private Button mSimplMethodButton;
     private Button mTranspProblemButton;
+    private Button mGraphTaskProblem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,16 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        mGraphTaskProblem = (Button) findViewById(R.id.button_graph_problem);
+        mGraphTaskProblem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,
+                        ActivityInputQuantityNodes.class);
+                startActivity(intent);
             }
         });
     }

@@ -1,89 +1,143 @@
 package android.com.operationsresearch;
 
-import android.app.ActionBar;
 import android.content.Context;
-import android.graphics.Typeface;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.util.TypedValue;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
-
-import android.text.InputType;
 
 public class InputDataSimplexMethod extends ActionBarActivity {
 
     final int NUM_VARS = 12;
-    final int NUM_EQ = 2;
+    final int NUM_EQUALS = 2;
     final int NUM_COL = 5;
+    final int TEXT_SIZE = 16;
+    final int MIN_WIDTH = 24;
 
-    EditText editTextArray[][] = new EditText[NUM_EQ][NUM_VARS];
+    EditText editTextArray[][] = new EditText[NUM_EQUALS][NUM_VARS];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_data_simplex_method);
 
-        //setContentView(R.layout.spec_function_layout);
+        createViewDinamicRows(InputDataSimplexMethod.this, NUM_VARS);
 
-        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.linLayout_spec_function);
 
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        HorizontalScrollView linearLayout = (HorizontalScrollView) inflater.inflate(R.layout.spec_function_layout, null);
-
-        //LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linLayout2_spec_function);
-
-        EditText editText = new EditText(InputDataSimplexMethod.this);
-        editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
-        linearLayout.addView(editText);
-
-        for (int i=1; i<NUM_VARS; i++){
-            TextView textView = new TextView(InputDataSimplexMethod.this);
-            textView.setText("x" + i);
-            linearLayout.addView(textView);
-
-            TextView textView2 = new TextView(InputDataSimplexMethod.this);
-            textView2.setText(" + ");
-            linearLayout.addView(textView2);
-
-            EditText editText2 = new EditText(InputDataSimplexMethod.this);
-            editText2.setRawInputType(InputType.TYPE_CLASS_NUMBER);
-            linearLayout.addView(editText2);
-        }
-
-        mainLayout.addView(linearLayout);
 
     }
 
 
-    private LinearLayout createViewSpecFunc(Context context,LinearLayout layout, int numVars){
+    private void createViewDinamicRows(Context context, int numVars){
+        // Настраиваем динамически изменяемое кол-во столбцов
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.tableLayout_spec_function);
 
-        EditText editText = new EditText(InputDataSimplexMethod.this);
-        editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
-        layout.addView(editText);
+        TableRow titleRowSpecFunc = new TableRow(context);
+        TextView titleSpecFunc = new TextView(context);
+        titleSpecFunc.setText(R.string.text_view_input_coef_obj_func);
+        titleSpecFunc.setTextSize(TEXT_SIZE * TypedValue.COMPLEX_UNIT_DIP);
+        titleRowSpecFunc.addView(titleSpecFunc);
+        tableLayout.addView(titleRowSpecFunc);
 
-        for (int i=1; i<numVars; i++){
-            TextView textView = new TextView(InputDataSimplexMethod.this);
-            textView.setText("x" + i);
-            layout.addView(textView);
+        TableRow rowSpecFunc = new TableRow(context);
+        for (int i=0; i<NUM_VARS; i++){
+            EditText editText = new EditText(context);
+            editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL |
+                    InputType.TYPE_NUMBER_FLAG_SIGNED);
+            editText.setMinWidth(MIN_WIDTH);
+            rowSpecFunc.addView(editText);
 
-            textView.setText(" + ");
-            layout.addView(textView);
+            TextView textView = new TextView(context);
+            textView.setTextSize(TEXT_SIZE*TypedValue.COMPLEX_UNIT_DIP);
+            String curVar ="x" + (i+1);
+            if (i<NUM_VARS-1){
+                textView.setText(curVar + " + ");
+                rowSpecFunc.addView(textView);
+            }
+            else{
+                textView.setText(curVar + " --> ");
+                rowSpecFunc.addView(textView);
 
-            layout.addView(editText);
+                Spinner spinner = new Spinner(context);
+                // Настраиваем адаптер
+                ArrayAdapter<?> adapter =
+                        ArrayAdapter.createFromResource(this, R.array.type_objective_func, R.layout.spinner);
+                adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+
+                // Вызываем адаптер
+                spinner.setAdapter(adapter);
+
+                rowSpecFunc.addView(spinner);
+            }
         }
-        return layout;
+        tableLayout.addView(rowSpecFunc);
+
+        // Растягиваем textView на все столбцы
+        //TextView textView = (TextView) findViewById(R.id.titleSpecFunct_TextView);
+        TableRow.LayoutParams params = (TableRow.LayoutParams)titleSpecFunc.getLayoutParams();
+        params.span = NUM_VARS;
+        titleSpecFunc.setLayoutParams(params);
+
+        // Создаем заголовок для ввода системы ограничений
+        TableRow rowTitleLimited = new TableRow(context);
+        TextView titleLimited = new TextView(context);
+        titleLimited.setText(R.string.text_view_title_limited);
+        titleLimited.setTextSize(TEXT_SIZE*TypedValue.COMPLEX_UNIT_DIP);
+        rowTitleLimited.addView(titleLimited);
+        tableLayout.addView(rowTitleLimited);
+        titleLimited.setLayoutParams(params);
+
+
+        // Создаем поля для ввода ограничений
+        for (int i=0; i<NUM_EQUALS; i++){
+            TableRow curRowLimited = new TableRow(context);
+            for(int j=0; j<NUM_VARS; j++){
+                EditText editText = new EditText(context);
+                editText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL |
+                        InputType.TYPE_NUMBER_FLAG_SIGNED);
+                editText.setMinWidth(MIN_WIDTH);
+                curRowLimited.addView(editText);
+
+                TextView textView = new TextView(context);
+                textView.setTextSize(TEXT_SIZE*TypedValue.COMPLEX_UNIT_DIP);
+                String curVar ="x" + (j+1);
+                if (j<NUM_VARS-1){
+                    textView.setText(curVar + " + ");
+                    curRowLimited.addView(textView);
+                }
+                else{
+                    textView.setText(curVar);
+                    curRowLimited.addView(textView);
+
+                    Spinner spinner = new Spinner(context);
+                    // Настраиваем адаптер
+                    ArrayAdapter<?> adapter =
+                            ArrayAdapter.createFromResource(this, R.array.type_of_equals, R.layout.spinner);
+                    adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+
+                    // Вызываем адаптер
+                    spinner.setAdapter(adapter);
+
+                    curRowLimited.addView(spinner);
+
+                    EditText editText2 = new EditText(context);
+                    editText2.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL |
+                            InputType.TYPE_NUMBER_FLAG_SIGNED);
+                    editText2.setMinWidth(2*MIN_WIDTH);
+                    curRowLimited.addView(editText2);
+                }
+            }
+            tableLayout.addView(curRowLimited);
+        }
+
     }
 
 

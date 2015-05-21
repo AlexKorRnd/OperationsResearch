@@ -4,6 +4,7 @@
     <string name="title_text_view">Какую задачу нужно решить?</string>
     <string name="button_simplex_method">Симплекс-метод</string>
     <string name="button_transport_problem">Транспортная задача</string>
+    <string name="button_graph_problem">Задачи на графах</string>
 
     <string name="button_prev">Назад</string>
     <string name="button_next">Дальше</string>
@@ -21,6 +22,34 @@
     <string name="title_activity_input_data_simplex_method">Ввод коэффициентов симплекс метода
     </string>
     <string name="text_view_input_coef_obj_func">Введите коэффициенты целевой функции :</string>
+    <string name="text_view_title_limited">Введите коэффициенты системы ограничений :</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string-array name="type_objective_func">
+        <item>max</item>
+        <item>min</item>
+    </string-array>
+
+    <string-array name="type_of_equals">
+        <item>&#8804;</item>
+        <item>=</item>
+        <item>&#8805;</item>
+    </string-array>
+
+    <string name="text_view_input_quantity_nodes">Введите количество вершин в графе</string>
+    <string name="title_activity_activity_input_quantity_nodes">Задачи на графах</string>
+    <string name="title_activity_activity_input_adjacent_nodes">Ввод  списка смежных вершин</string>
+
+    <string name="text_view_input_adjacent_nodes">Введите смежные вершины</string>
+    <string name="toast_fail_input_quantity_nodes">Ошибка!
+        Не введено кол-во вершин в графе.</string>
+    <string name="text_view_input_start_node">Введите вершину,
+        с которой следует начать поиск</string>
+
+
+    <string name="title_activity_dfsand_bfs">DFSandBFS</string>
+
+    <string name="toast_fail_load_graph">Произошла ошибка при загрузке графа!</string>
+    <string name="text_view_result_depth_first_search">Результат поиска в глубину</string>
+    <string name="text_view_result_breadth_first_search">Результат поиска в ширину</string>
+
 </resources>

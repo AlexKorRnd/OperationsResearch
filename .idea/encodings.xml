@@ -2,6 +2,13 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/ActivityInputAdjacentNodes.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/ActivityInputQuantityNodes.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/DepthFirstSearch.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/Graph.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/GraphJSONSerializer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/SingletonGraph.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/myList.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/InputDataSimplexMethod.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/SimplexMetodConfigQuantityVar.java" charset="UTF-8" />
   </component>
 </project>

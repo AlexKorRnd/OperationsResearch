@@ -24,6 +24,22 @@
             android:name=".InputDataSimplexMethod"
             android:label="@string/title_activity_input_data_simplex_method" >
         </activity>
+        <activity
+            android:name=".GraphTask.ActivityInputQuantityNodes"
+            android:label="@string/title_activity_activity_input_quantity_nodes"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.com.operationsresearch.MainActivity" />
+        </activity>
+        <activity
+            android:name=".GraphTask.ActivityInputAdjacentNodes"
+            android:label="@string/title_activity_activity_input_adjacent_nodes" >
+        </activity>
+        <activity
+            android:name=".GraphTask.ActivityDFSandBFS"
+            android:label="@string/title_activity_dfsand_bfs" >
+        </activity>
     </application>
 
 </manifest>
