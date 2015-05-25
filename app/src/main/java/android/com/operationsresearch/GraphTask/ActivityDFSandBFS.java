@@ -1,9 +1,12 @@
 package android.com.operationsresearch.GraphTask;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.com.operationsresearch.R;
@@ -16,15 +19,20 @@ import android.widget.Toast;
 public class ActivityDFSandBFS extends ActionBarActivity {
 
     private static final String TAG_DEBUG_LOAD_GRAPH = "graphTask.loadGraph";
+    private static final int TABLE_ROW_MIN_WIDTH = 75;
+    private static final int TEXT_SIZE = 18;
 
     private Graph mGraph;
     private int quantityNodes;
     private int startNode;
 
+    private boolean isEnabledDFS;
+    private boolean isEnabledBFS;
+
     private GraphJSONSerializer mSerializer;
 
-    private DepthFirstSearch mDepthFirstSearch;
-    private BreadthFirstSearch mBreadthFirstSearch;
+    private DepthFirstSearch mDFS;
+    private BreadthFirstSearch mBFS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +41,7 @@ public class ActivityDFSandBFS extends ActionBarActivity {
 
         loadGraph();
 
-
-
+        //TODO: сделать нормальное отображение результатов в альбомном режиме
         fillView(ActivityDFSandBFS.this);
 
     }
@@ -43,7 +50,7 @@ public class ActivityDFSandBFS extends ActionBarActivity {
         quantityNodes = getIntent().getIntExtra(ActivityInputQuantityNodes.TAG_QUANTITY_NODES, 0);
         startNode = getIntent().getIntExtra(ActivityInputAdjacentNodes.TAG_START_NODE, 0);
 
-        // ��������� ����
+
         mSerializer = new GraphJSONSerializer(ActivityDFSandBFS.this,
                 ActivityInputAdjacentNodes.FILENAME);
 
@@ -59,29 +66,136 @@ public class ActivityDFSandBFS extends ActionBarActivity {
 
 
     private void fillView(Context context){
-        mDepthFirstSearch = new DepthFirstSearch(mGraph);
-        mBreadthFirstSearch = new BreadthFirstSearch(mGraph);
-
+        // связываем главный layout с переменной
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.linear_layout_DFS_BFS);
 
+        // выводим заголовок ПВГ
         TextView textViewResultDFS = new TextView(context);
         textViewResultDFS.setText(R.string.text_view_result_depth_first_search);
+        textViewResultDFS.setMinWidth(TABLE_ROW_MIN_WIDTH);
+        textViewResultDFS.setTextSize(TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE);
+        textViewResultDFS.setTypeface(Typeface.SERIF, Typeface.BOLD);
         mainLayout.addView(textViewResultDFS);
 
-        TableLayout tableDFS = new TableLayout(context);
+        fillTableDFS(context,mainLayout);
 
-        TableRow tableRowDFS = new TableRow(context);
+        // выводим заголовок ПВШ
+        TextView textViewResultBFS = new TextView(context);
+        textViewResultBFS.setText(R.string.text_view_result_breadth_first_search);
+        textViewResultBFS.setMinWidth(TABLE_ROW_MIN_WIDTH);
+        textViewResultBFS.setTextSize(TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE);
+        textViewResultBFS.setTypeface(Typeface.SERIF, Typeface.BOLD);
+        mainLayout.addView(textViewResultBFS);
+
+        fillTableBFS(context, mainLayout);
+
+    }
+
+
+    public void fillTableDFS(Context context, LinearLayout mainLayout){
+        mDFS = new DepthFirstSearch(mGraph, startNode);
+
+        // таблица для вывода результатов ПВГ
+        TableLayout tableLayoutDFS = new TableLayout(context);
+        tableLayoutDFS.setGravity(Gravity.CENTER_HORIZONTAL);
+        //tableLayoutDFS.setStretchAllColumns(true);
+        //tableLayoutDFS.setShrinkAllColumns(true);
+
+        // выводим номера вершин
+        fillNumberNodesToTableRow(context, tableLayoutDFS);
+
+        TableRow rowNum = new TableRow(context);
+        fillArrayToTableRow(context, rowNum, "Num", mDFS.getNum());
+        tableLayoutDFS.addView(rowNum);
+
+        TableRow rowFtr = new TableRow(context);
+        fillArrayToTableRow(context, rowFtr, "ftr", mDFS.getFtr());
+        tableLayoutDFS.addView(rowFtr);
+
+        TableRow rowTn = new TableRow(context);
+        fillArrayToTableRow(context, rowTn, "tn", mDFS.getTn());
+        tableLayoutDFS.addView(rowTn);
+
+        TableRow rowTk = new TableRow(context);
+        fillArrayToTableRow(context, rowTk, "tk", mDFS.getTk());
+        tableLayoutDFS.addView(rowTk);
+
+        mainLayout.addView(tableLayoutDFS);
+    }
+
+    public void fillTableBFS(Context context, LinearLayout mainLayout){
+        mBFS = new BreadthFirstSearch(mGraph, startNode);
+        // таблица для вывода результатов ПВШ
+        TableLayout tableLayoutDFS = new TableLayout(context);
+        tableLayoutDFS.setGravity(Gravity.CENTER_HORIZONTAL);
+        //tableLayoutDFS.setStretchAllColumns(true);
+        //tableLayoutDFS.setShrinkAllColumns(true);
+
+        // выводим номера вершин
+        fillNumberNodesToTableRow(context, tableLayoutDFS);
+
+        TableRow rowNum = new TableRow(context);
+        fillArrayToTableRow(context, rowNum, "Num", mBFS.getNum());
+        tableLayoutDFS.addView(rowNum);
+
+        TableRow rowFtr = new TableRow(context);
+        fillArrayToTableRow(context, rowFtr, "ftr", mBFS.getFtr());
+        tableLayoutDFS.addView(rowFtr);
+
+        mainLayout.addView(tableLayoutDFS);
+    }
+
+
+    public void fillNumberNodesToTableRow(Context context, TableLayout tableLayout){
+        // строка для вывода номера вершины
+        TableRow tableRow = new TableRow(context);
         TextView textView = new TextView(context);
+        textView.setText("№");
+        textView.setMinWidth(TABLE_ROW_MIN_WIDTH);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE);
+        textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+        tableRow.addView(textView);
 
-        int[] tmpArray = mDepthFirstSearch.getFtr();
-        textView.setText("num");
-        tableRowDFS.addView(textView);
-        /*for (int i = 0; i <quantityNodes ; i++) {
-            te
-        }*/
+        for (Integer i = 1; i <= mGraph.getQuantityNodes(); i++) {
+            textView = new TextView(context);
+            textView.setText(i.toString());
+            textView.setMinWidth(TABLE_ROW_MIN_WIDTH);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE);
+            textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+            textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            tableRow.addView(textView);
+        }
 
-        tableDFS.addView(tableRowDFS);
-        mainLayout.addView(tableDFS);
+        tableLayout.addView(tableRow);
+
+    }
+
+
+    // процедура для вывода массива в строку таблицу
+    public void fillArrayToTableRow(Context context, TableRow tableRow, String title, int arr[]){
+        // выводим в 1-ый столбец заголовок
+        TextView textView = new TextView(context);
+        textView.setText(title);
+        textView.setMinWidth(TABLE_ROW_MIN_WIDTH);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE);
+        textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+        tableRow.addView(textView);
+
+        for (int i = 0; i <arr.length; i++) {
+            textView = new TextView(context);
+            Integer tmp = arr[i];
+            if (title.equals("ftr")){
+                tmp++;
+            }
+            textView.setText(tmp.toString());
+            textView.setMinWidth(TABLE_ROW_MIN_WIDTH);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, TEXT_SIZE);
+            textView.setTypeface(Typeface.SERIF, Typeface.NORMAL);
+            textView.setGravity(Gravity.CENTER_HORIZONTAL);
+            tableRow.addView(textView);
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package android.com.operationsresearch.GraphTask;
 
 import android.content.Context;
 import android.util.JsonReader;
+import android.util.JsonWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Алексей on 19.05.2015.
+ * Сохранения графа в формате JSON
  */
 public class GraphJSONSerializer  {
 
@@ -35,66 +36,74 @@ public class GraphJSONSerializer  {
 
     public void saveGraph(Graph mGraph) throws JSONException, IOException {
 
-
-        // Построение массивов в JSON
-        JSONArray array[] = new JSONArray[mGraph.getQuantityNodes()];
-        for (int i = 0; i <mGraph.getQuantityNodes() ; i++) {
-            array[i] = new JSONArray();
-            for(int node: mGraph.adj(i)){
-                array[i].put(node);
-            }
-        }
-
-        // Запись файла на диск
-        Writer writer = null;
+        JsonWriter writer = null;
         try {
             OutputStream out = mContext
                     .openFileOutput(mFilename, Context.MODE_PRIVATE);
-            writer = new OutputStreamWriter(out);
+            writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
 
-            for (int i = 0; i <mGraph.getQuantityNodes() ; i++) {
-                writer.write(array[i].toString());
+            writer.beginObject();
+
+            for (Integer i = 0; i <mGraph.getQuantityNodes(); i++) {
+                String name = i.toString();
+                writer.name(name);
+                writeIntegersArray(writer, mGraph.adj(i));
             }
+            writer.endObject();
         } finally {
-            if (writer != null)
+            if (writer != null){
+                //writer.endObject();
                 writer.close();
+            }
+
         }
     }
 
+    public void writeIntegersArray(JsonWriter writer, Iterable<Integer> nodes) throws IOException {
+        writer.beginArray();
+        for (int value : nodes) {
+            writer.value(value);
+        }
+        writer.endArray();
+    }
 
     public Graph loadGraph(int quantityNodes) throws JSONException, IOException{
+        JsonReader reader = null;
         Graph graph = new Graph(quantityNodes);
-        BufferedReader reader = null;
-        try{
-            // Открытие и чтение файла в StringBuilder
+        try {
             InputStream in = mContext.openFileInput(mFilename);
-            reader = new BufferedReader(new InputStreamReader(in));
-            StringBuilder jsonString = new StringBuilder();
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                jsonString.append(line);
-            }
+            reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
 
-            JSONArray array = (JSONArray) new JSONTokener(jsonString.toString())
-                    .nextValue();
+            reader.beginObject();
 
-
-
-            // Построение массива списков смежных вершин по данным JSONObject
-            for (int i = 0; i <quantityNodes ; i++) {
-                // Разбор JSON с использованием JSONTokener
-                for (int j = 0; j < array.length(); j++) {
-                    graph.addEdge(i, array.getInt(j));
+            for (Integer i = 0; i < graph.getQuantityNodes() ; i++) {
+                String name = reader.nextName();
+                if (name.equals(i.toString())){
+                    addNodes(reader, graph, i);
                 }
             }
+            reader.endObject();
 
-        } catch (FileNotFoundException e) {
-            // Происходит при начале "с нуля"; не обращайте внимания
+            return graph;
+
         } finally {
-            if (reader != null)
+            if (reader != null) {
+                //reader.endObject();
                 reader.close();
+            }
         }
-        return graph;
+
     }
 
+
+    public void addNodes(JsonReader reader, Graph graph, int indexNode) throws IOException {
+        //List doubles = new ArrayList();
+
+        reader.beginArray();
+        while (reader.hasNext()) {
+            int i = reader.nextInt();
+            graph.addEdge(indexNode, i);
+        }
+        reader.endArray();
+    }
 }

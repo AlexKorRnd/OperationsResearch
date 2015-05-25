@@ -104,25 +104,7 @@ public class Graph {
         return false;
     }
 
-    /**
-     * Returns a string representation of the graph.
-     * This method takes time proportional to <em>E</em> + <em>V</em>.
-     * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>,
-     *    followed by the <em>V</em> adjacency lists
-     */
-    /*public String toString() {
-        StringBuilder s = new StringBuilder();
-        String NEWLINE = System.getProperty("line.separator");
-        s.append(V + " vertices, " + E + " edges " + NEWLINE);
-        for (int v = 0; v < V; v++) {
-            s.append(v + ": ");
-            for (int w : adj[v]) {
-                s.append(w + " ");
-            }
-            s.append(NEWLINE);
-        }
-        return s.toString();
-    }*/
+
 
 }
 

@@ -42,11 +42,16 @@
     <string name="text_view_input_adjacent_nodes">Введите смежные вершины</string>
     <string name="toast_fail_input_quantity_nodes">Ошибка!
         Не введено кол-во вершин в графе.</string>
+
     <string name="text_view_input_start_node">Введите вершину,
         с которой следует начать поиск</string>
+    <string name="toast_fail_input_start_node">Ошибка! Вы не ввели вершину для поиска</string>
+    <string name="toast_input_incorrect_start_node">Ошибка! Вершина,
+        с которой следует начать поиска введена неправильно.</string>
+    <string name="toast_input_incorrect_node">Ошибка!
+        Неправильно введена одна из смежных вершин</string>
 
-
-    <string name="title_activity_dfsand_bfs">DFSandBFS</string>
+    <string name="title_activity_dfsand_bfs">Результаты поиска</string>
 
     <string name="toast_fail_load_graph">Произошла ошибка при загрузке графа!</string>
     <string name="text_view_result_depth_first_search">Результат поиска в глубину</string>

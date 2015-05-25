@@ -4,17 +4,17 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class MyQueue<Item> implements Iterable<Item> {
-    private int numberElems;      // кол-во элементов в очереди
-    private Node<Item> first;    // начало очереди
-    private Node<Item> last;     // конец очереди
+    private int numberElems;      // РєРѕР»-РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ РѕС‡РµСЂРµРґРё
+    private Node<Item> first;    // РЅР°С‡Р°Р»Рѕ РѕС‡РµСЂРµРґРё
+    private Node<Item> last;     // РєРѕРЅРµС† РѕС‡РµСЂРµРґРё
 
-    // вспомогательный класс для элемента очереди
+    // РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ РґР»СЏ СЌР»РµРјРµРЅС‚Р° РѕС‡РµСЂРµРґРё
     private static class Node<Item> {
         private Item item;
         private Node<Item> next;
     }
 
-    //Инициализация пустой очереди
+    //РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСѓСЃС‚РѕР№ РѕС‡РµСЂРµРґРё
     public MyQueue() {
         first = null;
         last  = null;
@@ -29,14 +29,14 @@ public class MyQueue<Item> implements Iterable<Item> {
         return numberElems;
     }
 
-    // Возвращение первого добавленного элемента
+    // Р’РѕР·РІСЂР°С‰РµРЅРёРµ РїРµСЂРІРѕРіРѕ РґРѕР±Р°РІР»РµРЅРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
     public Item peek() {
-        if (isEmpty()) throw new NoSuchElementException("Очередь пуста!");
+        if (isEmpty()) throw new NoSuchElementException("РћС‡РµСЂРµРґСЊ РїСѓСЃС‚Р°!");
         return first.item;
     }
 
 
-    // Добавление элемента в очередь
+    // Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ РѕС‡РµСЂРµРґСЊ
     public void enqueue(Item item) {
         Node<Item> oldlast = last;
         last = new Node<Item>();
@@ -54,7 +54,7 @@ public class MyQueue<Item> implements Iterable<Item> {
     //
     public Item dequeue() {
         if (isEmpty()){
-            throw new NoSuchElementException("Очередь пуста!");
+            throw new NoSuchElementException("РћС‡РµСЂРµРґСЊ РїСѓСЃС‚Р°!");
         }
         Item item = first.item;
         first = first.next;
@@ -66,12 +66,12 @@ public class MyQueue<Item> implements Iterable<Item> {
     }
 
 
-    //Итератор, который перебирает элементы согласно правилу FIFO
+    //РС‚РµСЂР°С‚РѕСЂ, РєРѕС‚РѕСЂС‹Р№ РїРµСЂРµР±РёСЂР°РµС‚ СЌР»РµРјРµРЅС‚С‹ СЃРѕРіР»Р°СЃРЅРѕ РїСЂР°РІРёР»Сѓ FIFO
     public Iterator<Item> iterator()  {
         return new ListIterator<Item>(first);
     }
 
-    // внутренний класс, определяющий итератор
+    // РІРЅСѓС‚СЂРµРЅРЅРёР№ РєР»Р°СЃСЃ, РѕРїСЂРµРґРµР»СЏСЋС‰РёР№ РёС‚РµСЂР°С‚РѕСЂ
     private class ListIterator<Item> implements Iterator<Item> {
         private Node<Item> current;
 

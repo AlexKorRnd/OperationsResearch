@@ -2,6 +2,7 @@ package android.com.operationsresearch.GraphTask;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,18 +18,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class ActivityInputAdjacentNodes extends ActionBarActivity {
 
     private static final String TAG = "GraphProblem";
+    private static final String TAG_ARRAY_EDIT_TEXT = "GraphProblem_array_edit_text";
     static final String FILENAME = "graph.json";
     static final String TAG_START_NODE = "GraphProblem_StartNode";
     private static final String TAG_GRAPH = "GraphProblem_Graph";
+
+    private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
 
     private GraphJSONSerializer mSerializer;
 
@@ -55,26 +61,51 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
         mGraph = new Graph(quantityNodes);
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                for (int i=0; i<quantityNodes; i++){
-                    String tmp = mAdjacentNodesEditText[i].getText().toString();
-                    if (tmp.equals("")){
-                        continue;
-                    }
-                    String[] nodesArray = tmp.split("(\\D)");
-                    for (int j=0; j<nodesArray.length; j++){
-                        // добавляем вершину к вершине i
-                        mGraph.addEdge(i, Integer.parseInt(nodesArray[j])-1);
-                    }
+                parseAdjNodes();
+                createNewIntent();
+        }
+        });
+
+    }
+
+    private void parseAdjNodes(){
+        // обрабатываем ввод смежных вершин
+        for (int i=0; i<quantityNodes; i++){
+            String tmp = mAdjacentNodesEditText[i].getText().toString();
+            if (tmp.equals("")){
+                continue;
+            }
+            String[] nodesArray = tmp.split("(\\D)");
+            for (int j=0; j<nodesArray.length; j++){
+                int node = Integer.parseInt(nodesArray[j]);
+                if (startNode>= 1 && startNode<=quantityNodes) {
+                    // добавляем вершину к вершине i
+                    mGraph.addEdge(i, node-1);
+                } else{
+                    int messageResId = R.string.toast_input_incorrect_node;
+                    Toast.makeText(ActivityInputAdjacentNodes.this, messageResId,
+                            Toast.LENGTH_SHORT).show();
                 }
+            }
+        }
+    }
 
+    private void createNewIntent(){
+        Intent intent = new Intent(ActivityInputAdjacentNodes.this,
+                ActivityDFSandBFS.class);
 
-                Intent intent = new Intent(ActivityInputAdjacentNodes.this,
-                        ActivityDFSandBFS.class);
-                intent.putExtra(ActivityInputQuantityNodes.TAG_QUANTITY_NODES, quantityNodes);
-                intent.putExtra(TAG_START_NODE,
-                        Integer.parseInt(mEditTextStartNode.getText().toString()));
+        // передаем кол-во вершин в графе
+        intent.putExtra(ActivityInputQuantityNodes.TAG_QUANTITY_NODES, quantityNodes);
+
+        if (! mEditTextStartNode.getText().toString().isEmpty()) {
+            startNode = Integer.parseInt(mEditTextStartNode.getText().toString());
+
+            if (startNode>= 1 && startNode<=quantityNodes){
+                // передаем начальную вершину поиска
+                intent.putExtra(TAG_START_NODE, startNode);
 
                 // сохраняем граф
                 mSerializer = new GraphJSONSerializer(ActivityInputAdjacentNodes.this,
@@ -89,8 +120,17 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
 
                 startActivity(intent);
             }
-        });
+            else{
+                int messageResId = R.string.toast_input_incorrect_start_node;
+                Toast.makeText(ActivityInputAdjacentNodes.this, messageResId,
+                        Toast.LENGTH_SHORT).show();
+            }
 
+        } else{
+            int messageResId = R.string.toast_fail_input_start_node;
+            Toast.makeText(ActivityInputAdjacentNodes.this, messageResId,
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void createView(Context context, int numNodes){
@@ -109,6 +149,7 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
             linearLayout.addView(textView);
 
             mAdjacentNodesEditText[i] = new EditText(context);
+            //mAdjacentNodesEditText[i].setId(View.generateViewId());
             linearLayout.addView(mAdjacentNodesEditText[i]);
 
             mainLayout.addView(linearLayout);
@@ -127,10 +168,48 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
         mainLayout.addView(mNextButton);
     }
 
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
 
-    /*private int[] StringToIntArray(String string){
+        String stringEditText[] = new String[quantityNodes];
+        stringEditText = savedInstanceState.getStringArray(TAG_ARRAY_EDIT_TEXT);
 
-    }*/
+        for (int i = 0; i <quantityNodes ; i++) {
+            mAdjacentNodesEditText[i].setText(stringEditText[i]);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+
+        String stringEditText[] = new String[quantityNodes];
+        for (int i = 0; i <quantityNodes; i++) {
+            stringEditText[i] = mAdjacentNodesEditText[i].getText().toString();
+        }
+
+        savedInstanceState.putStringArray(TAG_ARRAY_EDIT_TEXT, stringEditText);
+    }
+
+    /**
+     * Generate a value suitable for use in .
+     * This value will not collide with ID values generated at build time by aapt for R.id.
+     *
+     * @return a generated ID value
+     */
+    public static int generateViewId() {
+        for (;;) {
+            final int result = sNextGeneratedId.get();
+            // aapt-generated IDs have the high byte nonzero; clamp to the range under that.
+            int newValue = result + 1;
+            if (newValue > 0x00FFFFFF) newValue = 1; // Roll over to 1, not 0.
+            if (sNextGeneratedId.compareAndSet(result, newValue)) {
+                return result;
+            }
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

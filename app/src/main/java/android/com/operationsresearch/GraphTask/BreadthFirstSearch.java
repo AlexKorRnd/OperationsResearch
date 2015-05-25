@@ -1,18 +1,13 @@
 package android.com.operationsresearch.GraphTask;
 
 
-
-
-/**
- * Created by Алексей on 20.05.2015.
- */
 public class BreadthFirstSearch {
     int num[];
     int ftr[];
 
     MyQueue<Integer> queue;
 
-    BreadthFirstSearch(Graph graph){
+    BreadthFirstSearch(Graph graph, int startNode){
         num = new int[graph.getQuantityNodes()];
         ftr = new int[graph.getQuantityNodes()];
 
@@ -22,6 +17,8 @@ public class BreadthFirstSearch {
             num[i] = -1;
         }
 
+        // РЅР°С‡РёРЅР°РµРј СЃ С‚РѕР№ РІРµСЂС€РёРЅРµ, РєРѕС‚РѕСЂСѓСЋ РїРµСЂРµРґР°Р»Рё РІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРµ
+        BFS(graph, startNode);
         for (int r = 0; r <graph.getQuantityNodes() ; r++) {
             if (num[r] == -1){
                 BFS(graph, r);
@@ -30,17 +27,25 @@ public class BreadthFirstSearch {
     }
 
     private void BFS(Graph graph, int r){
-        num[r] = 0;  ftr[r] = 0;  // присвоение меток корню
-        queue.enqueue(r);  // помещаем корень в очередь
-        while (queue != null){
-            int i = queue.peek();  // считываем из очереди вершину
-            for (int j: graph.adj(i)){  // для каждой вершины из списка смежности
-                if (num[j] == -1){      // если вершина не помечена
-                    queue.enqueue(j);   // помещаем ее в очередь
-                    ftr[j] = i;         // и помечаем вершину
+        num[r] = 0;  ftr[r] = 0;
+        queue.enqueue(r);
+        while (!queue.isEmpty()){
+            int i = queue.dequeue();
+            for (int j: graph.adj(i)){
+                if (num[j] == -1){
+                    queue.enqueue(j);
+                    ftr[j] = i;
                     num[j] = num[i] + 1;
                 }
             }
         }
+    }
+
+    public int[] getNum() {
+        return num;
+    }
+
+    public int[] getFtr() {
+        return ftr;
     }
 }

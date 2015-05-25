@@ -1,7 +1,7 @@
 package android.com.operationsresearch.GraphTask;
 
 /**
- * Created by Алексей on 20.05.2015.
+ * Поиск в глубину
  */
 public class DepthFirstSearch {
     private int num[];
@@ -12,7 +12,7 @@ public class DepthFirstSearch {
     private int time;
     private int k;
 
-    DepthFirstSearch(Graph graph){
+    DepthFirstSearch(Graph graph, int startNode){
         num = new int[graph.getQuantityNodes()];
         ftr = new int[graph.getQuantityNodes()];
         tn = new int[graph.getQuantityNodes()];
@@ -24,6 +24,9 @@ public class DepthFirstSearch {
 
         time = 0;
         k = 1;
+
+        // начинаем с той вершине, которую передали в конструкторе
+        DFS(graph, startNode);
 
         for (int r = 0; r < graph.getQuantityNodes(); r++) {
             if (num[r] == -1){
