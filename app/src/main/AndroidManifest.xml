@@ -40,6 +40,14 @@
             android:name=".GraphTask.ActivityDFSandBFS"
             android:label="@string/title_activity_dfsand_bfs" >
         </activity>
+        <activity
+            android:name=".GraphTask.InputWeightEdges"
+            android:label="@string/title_activity_input_weight_edges" >
+        </activity>
+        <activity
+            android:name=".GraphTask.Result"
+            android:label="@string/title_activity_result" >
+        </activity>
     </application>
 
 </manifest>

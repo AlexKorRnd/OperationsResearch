@@ -1,13 +1,17 @@
 package android.com.operationsresearch.GraphTask;
 
 
+import android.content.Context;
+import android.widget.TableLayout;
+
 public class BreadthFirstSearch {
-    int num[];
-    int ftr[];
+    private int num[];
+    private int ftr[];
+    private TableLayout[] mTableLayouts;
 
     MyQueue<Integer> queue;
 
-    BreadthFirstSearch(Graph graph, int startNode){
+    BreadthFirstSearch(Context context, Graph graph, int startNode){
         num = new int[graph.getQuantityNodes()];
         ftr = new int[graph.getQuantityNodes()];
 
@@ -15,11 +19,13 @@ public class BreadthFirstSearch {
 
         for (int i = 0; i <graph.getQuantityNodes() ; i++) {
             num[i] = -1;
+            ftr[i] = -1;
         }
 
         // начинаем с той вершине, которую передали в конструкторе
+        int i = 0;
         BFS(graph, startNode);
-        for (int r = 0; r <graph.getQuantityNodes() ; r++) {
+        for (int r = 0; r <graph.getQuantityNodes(); r++) {
             if (num[r] == -1){
                 BFS(graph, r);
             }
@@ -27,7 +33,7 @@ public class BreadthFirstSearch {
     }
 
     private void BFS(Graph graph, int r){
-        num[r] = 0;  ftr[r] = 0;
+        num[r] = 0;  ftr[r] = -1;
         queue.enqueue(r);
         while (!queue.isEmpty()){
             int i = queue.dequeue();
@@ -40,6 +46,9 @@ public class BreadthFirstSearch {
             }
         }
     }
+
+
+
 
     public int[] getNum() {
         return num;

@@ -10,6 +10,9 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.com.operationsresearch.R;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -77,7 +80,10 @@ public class ActivityDFSandBFS extends ActionBarActivity {
         textViewResultDFS.setTypeface(Typeface.SERIF, Typeface.BOLD);
         mainLayout.addView(textViewResultDFS);
 
-        fillTableDFS(context,mainLayout);
+        //Kraskal a = new Kraskal();
+        fillTableDFS(context, mainLayout);
+
+        //viewGraph(context,mainLayout, mDFS.getNum(), mDFS.getNum());
 
         // выводим заголовок ПВШ
         TextView textViewResultBFS = new TextView(context);
@@ -93,7 +99,7 @@ public class ActivityDFSandBFS extends ActionBarActivity {
 
 
     public void fillTableDFS(Context context, LinearLayout mainLayout){
-        mDFS = new DepthFirstSearch(mGraph, startNode);
+        mDFS = new DepthFirstSearch(mGraph, startNode-1);
 
         // таблица для вывода результатов ПВГ
         TableLayout tableLayoutDFS = new TableLayout(context);
@@ -124,7 +130,7 @@ public class ActivityDFSandBFS extends ActionBarActivity {
     }
 
     public void fillTableBFS(Context context, LinearLayout mainLayout){
-        mBFS = new BreadthFirstSearch(mGraph, startNode);
+        mBFS = new BreadthFirstSearch(context, mGraph, startNode-1);
         // таблица для вывода результатов ПВШ
         TableLayout tableLayoutDFS = new TableLayout(context);
         tableLayoutDFS.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -197,6 +203,30 @@ public class ActivityDFSandBFS extends ActionBarActivity {
             tableRow.addView(textView);
         }
     }
+
+
+/*    private void viewGraph(Context context, LinearLayout mainLayout, int[] num, int[] ftr){
+
+        TableLayout tableGraph = new TableLayout(context);
+        MyQueue<Integer> queue = new MyQueue<>();
+        *//*int maxLevel = 0;
+        for (int i=0; i<num.length; i++){
+            if (num[i]>maxLevel){
+                maxLevel = num[i];
+            }
+        }*//*
+
+        TableRow row0 = new TableRow(context);
+        TableRow.LayoutParams params = new TableRow.LayoutParams();
+        params.span = num.length;
+
+        //queue.enqueue(startNode);
+        for (int node:mGraph.adj(startNode)){
+            Button buttonNode = new Button(context);
+            buttonNode.setText();
+        }
+
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

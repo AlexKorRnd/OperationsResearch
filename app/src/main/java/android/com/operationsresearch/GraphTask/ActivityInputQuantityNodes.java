@@ -56,7 +56,7 @@ public class ActivityInputQuantityNodes extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityInputQuantityNodes.this,
-                        ActivityInputAdjacentNodes.class);
+                        InputWeightEdges.class);
                 if (! mQuantityNodesEditText.getText().toString().isEmpty()){
                     quantity = Integer.parseInt(mQuantityNodesEditText.getText().toString());
                     intent.putExtra(TAG_QUANTITY_NODES, quantity);

@@ -81,7 +81,7 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
             String[] nodesArray = tmp.split("(\\D)");
             for (int j=0; j<nodesArray.length; j++){
                 int node = Integer.parseInt(nodesArray[j]);
-                if (startNode>= 1 && startNode<=quantityNodes) {
+                if (node>= 1 && node<=quantityNodes) {
                     // добавляем вершину к вершине i
                     mGraph.addEdge(i, node-1);
                 } else{
@@ -149,7 +149,7 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
             linearLayout.addView(textView);
 
             mAdjacentNodesEditText[i] = new EditText(context);
-            //mAdjacentNodesEditText[i].setId(View.generateViewId());
+            mAdjacentNodesEditText[i].setInputType(InputType.TYPE_CLASS_PHONE);
             linearLayout.addView(mAdjacentNodesEditText[i]);
 
             mainLayout.addView(linearLayout);

@@ -14,6 +14,7 @@ public class myList<Item> implements Iterable<Item> {
     // вспомогательный класс для вершины списка
     private static class Node<Item> {
         private Item item;
+
         private Node<Item> next;
     }
 

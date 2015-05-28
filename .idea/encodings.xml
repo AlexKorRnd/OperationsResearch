@@ -6,7 +6,10 @@
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/DepthFirstSearch.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/Graph.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/GraphJSONSerializer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/InputWeightEdges.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/Kraskal.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/MyQueue.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/Result.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/SingletonGraph.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/myList.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/InputDataSimplexMethod.java" charset="UTF-8" />

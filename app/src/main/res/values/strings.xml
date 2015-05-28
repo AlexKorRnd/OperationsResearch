@@ -56,5 +56,9 @@
     <string name="toast_fail_load_graph">Произошла ошибка при загрузке графа!</string>
     <string name="text_view_result_depth_first_search">Результат поиска в глубину</string>
     <string name="text_view_result_breadth_first_search">Результат поиска в ширину</string>
+    <string name="title_activity_input_weight_edges">InputWeightEdges</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_result">Result</string>
 
 </resources>
