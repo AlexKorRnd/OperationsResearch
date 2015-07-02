@@ -1,45 +1,43 @@
-package android.com.operationsresearch.GraphTask;
+package android.com.GraphTask;
 
 import java.util.Arrays;
 
 /**
  * Created by Алексей on 26.05.2015.
  */
-public class Kraskal {
+public class Kruskal {
 
 
     private int[] rnk;
     private int[] ftr;
-    private Edge mEdge[];
-    private MyQueue<Edge> UT;
+    private WeightedEdge mEdge[];
+    private MyQueue<WeightedEdge> UT;
 
-    Kraskal(EdgeWeightedGraph weightedGraph){
+    Kruskal(EdgeWeightedGraph weightedGraph){
 
-        ftr = new int[weightedGraph.V()];
-        rnk = new int[weightedGraph.V()];
+        ftr = new int[weightedGraph.getQuantityNodes()];
+        rnk = new int[weightedGraph.getQuantityNodes()];
 
         UT = new MyQueue<>();
-        mEdge = new Edge[weightedGraph.E()];
+        mEdge = new WeightedEdge[weightedGraph.getQuantityEdges()];
 
-        for (int i = 0; i <weightedGraph.V() ; i++) {
+        for (int i = 0; i <weightedGraph.getQuantityNodes() ; i++) {
             ftr[i] = i;
             rnk[i] = 0;
         }
 
         int t = 0;
-        for (Edge edge: weightedGraph.edges()){
+        for (WeightedEdge edge: weightedGraph.edges()){
             mEdge[t++] = edge;
         }
 
         Arrays.sort(mEdge);
 
-        for (int k=0; k<weightedGraph.E(); k++) {
+        for (int k=0; k<weightedGraph.getQuantityEdges(); k++) {
             int i = mEdge[k].either();
             int j = mEdge[k].other(i);
-            //int FIND_i = Find(i);
-            //int FIND_j = Find(j);
             if (Find(i) != Find(j)){
-                UT.enqueue(mEdge[k]);
+                UT.push(mEdge[k]);
                 Union(Find(i), Find(j));
             }
         }
@@ -75,7 +73,7 @@ public class Kraskal {
         return ftr;
     }
 
-    public MyQueue<Edge> getUT() {
+    public MyQueue<WeightedEdge> getUT() {
         return UT;
     }
 }

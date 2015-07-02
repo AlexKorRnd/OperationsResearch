@@ -1,4 +1,4 @@
-package android.com.operationsresearch;
+package android.com.GraphTask;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

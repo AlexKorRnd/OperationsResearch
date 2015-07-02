@@ -1,4 +1,4 @@
-package android.com.operationsresearch;
+package android.com.GraphTask;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -8,45 +8,47 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import android.com.GraphTask.R;
 
-public class SimplexMetodConfigQuantityVar extends ActionBarActivity {
+public class ActivitySelectGraphProblem extends ActionBarActivity {
 
-    private Button mPrevButton;
-    private Button mNextButton;
+    final static String TAG_PROBLEM_DFS_BFS = "graph_problem_DFS_BFS";
+    final static String TAG_PROBLEM_KRUSKAL = "graph_problem_Kruskal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simplex_metod_config_quantity_var);
+        setContentView(R.layout.activity_select_graph_problem);
 
-        mPrevButton = (Button) findViewById(R.id.button_prev);
-        mPrevButton.setOnClickListener(new View.OnClickListener() {
+        Button buttonDFS_BFS = (Button) findViewById(R.id.button_DFS_BFS);
+        buttonDFS_BFS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SimplexMetodConfigQuantityVar.this,
-                        MainActivity.class);
+                Intent intent = new Intent(ActivitySelectGraphProblem.this,
+                        ActivityInputQuantityNodes.class);
+                intent.putExtra(TAG_PROBLEM_DFS_BFS, true);
+                intent.putExtra(TAG_PROBLEM_KRUSKAL, false);
                 startActivity(intent);
             }
         });
 
-        mNextButton = (Button) findViewById(R.id.button_next);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
+        Button buttonKruskal = (Button) findViewById(R.id.button_Kruskal);
+        buttonKruskal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(SimplexMetodConfigQuantityVar.this,
-                        InputDataSimplexMethod.class);
+                Intent intent = new Intent(ActivitySelectGraphProblem.this,
+                        ActivityInputQuantityNodes.class);
+                intent.putExtra(TAG_PROBLEM_DFS_BFS, false);
+                intent.putExtra(TAG_PROBLEM_KRUSKAL, true);
                 startActivity(intent);
-
             }
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_simplex_metod_config_quantity_var, menu);
+        getMenuInflater().inflate(R.menu.menu_select_graph_problem, menu);
         return true;
     }
 

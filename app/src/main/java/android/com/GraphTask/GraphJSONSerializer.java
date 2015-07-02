@@ -1,24 +1,16 @@
-package android.com.operationsresearch.GraphTask;
+package android.com.GraphTask;
 
 import android.content.Context;
 import android.util.JsonReader;
 import android.util.JsonWriter;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Сохранения графа в формате JSON
@@ -47,7 +39,8 @@ public class GraphJSONSerializer  {
             for (Integer i = 0; i <mGraph.getQuantityNodes(); i++) {
                 String name = i.toString();
                 writer.name(name);
-                writeIntegersArray(writer, mGraph.adj(i));
+                writeIntegersArray(writer, mGraph.adj[i]);
+
             }
             writer.endObject();
         } finally {
@@ -59,10 +52,10 @@ public class GraphJSONSerializer  {
         }
     }
 
-    public void writeIntegersArray(JsonWriter writer, Iterable<Integer> nodes) throws IOException {
+    private void writeIntegersArray(JsonWriter writer, Iterable<Edge> nodes) throws IOException {
         writer.beginArray();
-        for (int value : nodes) {
-            writer.value(value);
+        for (Edge edge : nodes) {
+            writer.value(edge.either());
         }
         writer.endArray();
     }
@@ -96,7 +89,7 @@ public class GraphJSONSerializer  {
     }
 
 
-    public void addNodes(JsonReader reader, Graph graph, int indexNode) throws IOException {
+    private void addNodes(JsonReader reader, Graph graph, int indexNode) throws IOException {
         //List doubles = new ArrayList();
 
         reader.beginArray();

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">OperationsResearch</string>
+    <string name="app_name">Решатель задач на графах</string>
 
     <string name="title_text_view">Какую задачу нужно решить?</string>
     <string name="button_simplex_method">Симплекс-метод</string>
@@ -39,7 +39,7 @@
     <string name="title_activity_activity_input_quantity_nodes">Задачи на графах</string>
     <string name="title_activity_activity_input_adjacent_nodes">Ввод  списка смежных вершин</string>
 
-    <string name="text_view_input_adjacent_nodes">Введите смежные вершины</string>
+    <string name="text_view_input_adjacent_nodes">Введите через прообел смежные вершины</string>
     <string name="toast_fail_input_quantity_nodes">Ошибка!
         Не введено кол-во вершин в графе.</string>
 
@@ -56,9 +56,22 @@
     <string name="toast_fail_load_graph">Произошла ошибка при загрузке графа!</string>
     <string name="text_view_result_depth_first_search">Результат поиска в глубину</string>
     <string name="text_view_result_breadth_first_search">Результат поиска в ширину</string>
-    <string name="title_activity_input_weight_edges">InputWeightEdges</string>
+    <string name="title_activity_input_weight_edges">Ввод весов ребер</string>
+
+    <string name="text_view_type_graph">Выберете тип графа</string>
+
+    <string name="title_input_weight_edges">Ввод взвешенного графа(если ребра нет следует оставить
+        поле пустым).\nЕсли граф неориентированный, то можно для простоты вводить веса ребер
+        только выше главной диагонали
+    </string>
+
+    <string name="title_select_graph_problem">Какую задачу требуется решить</string>
+    <string name="title_activity_result">Результаты алгоритма Краскала</string>
+    <string name="title_activity_select_graph_problem">Выбор задачи</string>
+    <string name="button_DFS_BFS">Поиск в глубину и в ширину</string>
+    <string name="button_Kruskal">Алгоритм Краскала</string>
+    <string name="title_activity_test_graph_view">TestGraphViewActivity</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_result">Result</string>
 
 </resources>

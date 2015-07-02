@@ -1,4 +1,4 @@
-package android.com.operationsresearch.GraphTask;
+package android.com.GraphTask;
 
 /**
  * Created by Алексей on 20.05.2015.
@@ -7,21 +7,20 @@ package android.com.operationsresearch.GraphTask;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class myList<Item> implements Iterable<Item> {
+public class MyList<Item> implements Iterable<Item> {
     private int quantityNode;    // кол-во вершин в списке
     private Node<Item> first;    // вершина списка
 
     // вспомогательный класс для вершины списка
     private static class Node<Item> {
         private Item item;
-
         private Node<Item> next;
     }
 
     /**
      * Создание пустого списка
      */
-    public myList() {
+    public MyList() {
         first = null;
         quantityNode = 0;
     }

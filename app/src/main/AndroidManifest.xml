@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.com.operationsresearch" >
+    package="android.com.GraphTask" >
 
     <application
         android:allowBackup="true"
@@ -8,44 +8,31 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name="android.com.GraphTask.ActivitySelectGraphProblem"
+            android:label="@string/title_activity_select_graph_problem" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".SimplexMetodConfigQuantityVar"
-            android:label="@string/title_activity_simplex_metod_config_quantity_var" >
+            android:name="android.com.GraphTask.ActivityInputQuantityNodes"
+            android:label="@string/title_activity_activity_input_quantity_nodes">
         </activity>
         <activity
-            android:name=".InputDataSimplexMethod"
-            android:label="@string/title_activity_input_data_simplex_method" >
-        </activity>
-        <activity
-            android:name=".GraphTask.ActivityInputQuantityNodes"
-            android:label="@string/title_activity_activity_input_quantity_nodes"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="android.com.operationsresearch.MainActivity" />
-        </activity>
-        <activity
-            android:name=".GraphTask.ActivityInputAdjacentNodes"
+            android:name="android.com.GraphTask.ActivityInputAdjacentNodes"
             android:label="@string/title_activity_activity_input_adjacent_nodes" >
         </activity>
         <activity
-            android:name=".GraphTask.ActivityDFSandBFS"
+            android:name="android.com.GraphTask.ActivityResultDFSandBFS"
             android:label="@string/title_activity_dfsand_bfs" >
         </activity>
         <activity
-            android:name=".GraphTask.InputWeightEdges"
+            android:name="android.com.GraphTask.ActivityInputWeightEdges"
             android:label="@string/title_activity_input_weight_edges" >
         </activity>
         <activity
-            android:name=".GraphTask.Result"
+            android:name="android.com.GraphTask.ActivityResultKruskal"
             android:label="@string/title_activity_result" >
         </activity>
     </application>

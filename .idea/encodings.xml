@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/ActivityInputAdjacentNodes.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/ActivityInputQuantityNodes.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/DepthFirstSearch.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/Graph.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/GraphJSONSerializer.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/InputWeightEdges.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/Kraskal.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/MyQueue.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/Result.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/SingletonGraph.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/GraphTask/myList.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/build.gradle" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/ActivityInputAdjacentNodes.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/ActivityInputQuantityNodes.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/ActivityInputWeightEdges.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/ActivityResultKruskal.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/DepthFirstSearch.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/Edge.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/EdgeWeightedGraph.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/Graph.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/GraphJSONSerializer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/GraphView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/GraphView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/Kruskal.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/MyList.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/MyQueue.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/GraphTask/MyView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/ActivityInputAdjacentNodes.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/ActivityInputQuantityNodes.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/ActivityInputWeightEdges.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/ActivityResultKruskal.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/DepthFirstSearch.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/Edge.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/EdgeWeightedGraph.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/Graph.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/GraphJSONSerializer.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/Kruskal.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/MyList.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/MyQueue.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/MyView.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/GraphTask/WeightedEdge.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/InputDataSimplexMethod.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/android/com/operationsresearch/SimplexMetodConfigQuantityVar.java" charset="UTF-8" />
   </component>

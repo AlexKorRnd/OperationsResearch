@@ -1,4 +1,4 @@
-package android.com.operationsresearch.GraphTask;
+package android.com.GraphTask;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -37,7 +37,7 @@ public class MyQueue<Item> implements Iterable<Item> {
 
 
     // Добавление элемента в очередь
-    public void enqueue(Item item) {
+    public void push(Item item) {
         Node<Item> oldlast = last;
         last = new Node<Item>();
         last.item = item;
@@ -52,7 +52,7 @@ public class MyQueue<Item> implements Iterable<Item> {
     }
 
     //
-    public Item dequeue() {
+    public Item pop() {
         if (isEmpty()){
             throw new NoSuchElementException("Очередь пуста!");
         }

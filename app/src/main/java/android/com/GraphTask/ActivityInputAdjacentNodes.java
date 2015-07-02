@@ -1,20 +1,16 @@
-package android.com.operationsresearch.GraphTask;
+package android.com.GraphTask;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.com.operationsresearch.R;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,14 +21,17 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import android.com.GraphTask.R;
+
 
 public class ActivityInputAdjacentNodes extends ActionBarActivity {
 
-    private static final String TAG = "GraphProblem";
     private static final String TAG_ARRAY_EDIT_TEXT = "GraphProblem_array_edit_text";
+    static final String TAG_IS_ENABLED_DFS = "GraphProblem.IS_ENABLED_DFS";
+    static final String TAG_IS_ENABLED_BFS = "GraphProblem.IS_ENABLED_BFS";
+
     static final String FILENAME = "graph.json";
     static final String TAG_START_NODE = "GraphProblem_StartNode";
-    private static final String TAG_GRAPH = "GraphProblem_Graph";
 
     private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
 
@@ -47,6 +46,7 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
     private EditText mAdjacentNodesEditText[];
     private Button mNextButton;
     EditText mEditTextStartNode;
+    CheckBox mCheckBoxDFS, mCheckBoxBFS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +95,7 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
 
     private void createNewIntent(){
         Intent intent = new Intent(ActivityInputAdjacentNodes.this,
-                ActivityDFSandBFS.class);
+                ActivityResultDFSandBFS.class);
 
         // передаем кол-во вершин в графе
         intent.putExtra(ActivityInputQuantityNodes.TAG_QUANTITY_NODES, quantityNodes);
@@ -106,6 +106,12 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
             if (startNode>= 1 && startNode<=quantityNodes){
                 // передаем начальную вершину поиска
                 intent.putExtra(TAG_START_NODE, startNode);
+
+                boolean isDFS = mCheckBoxDFS.isChecked();
+                boolean isBFS = mCheckBoxBFS.isChecked();
+
+                intent.putExtra(TAG_IS_ENABLED_DFS, mCheckBoxDFS.isChecked());
+                intent.putExtra(TAG_IS_ENABLED_BFS, mCheckBoxBFS.isChecked());
 
                 // сохраняем граф
                 mSerializer = new GraphJSONSerializer(ActivityInputAdjacentNodes.this,
@@ -160,11 +166,22 @@ public class ActivityInputAdjacentNodes extends ActionBarActivity {
         mainLayout.addView(mTextView);
 
         mEditTextStartNode = new EditText(context);
+        mEditTextStartNode.setInputType(InputType.TYPE_CLASS_NUMBER);
         mainLayout.addView(mEditTextStartNode);
+
+        mCheckBoxDFS = new CheckBox(context);
+        mCheckBoxDFS.setText("Поиск в глубину");
+        mainLayout.addView(mCheckBoxDFS);
+
+        mCheckBoxBFS = new CheckBox(context);
+        mCheckBoxBFS.setText("Поиск в ширину");
+        mainLayout.addView(mCheckBoxBFS);
 
         mNextButton = new Button(context);
         mNextButton.setText(R.string.button_next);
         mNextButton.setGravity(Gravity.CENTER_HORIZONTAL);
+
+
         mainLayout.addView(mNextButton);
     }
 

@@ -1,4 +1,4 @@
-package android.com.operationsresearch.GraphTask;
+package android.com.GraphTask;
 
 /**
  * Поиск в глубину
@@ -40,7 +40,8 @@ public class DepthFirstSearch {
         tn[i] = time;
         num[i] = k;
         k++;
-        for (int j: graph.adj(i)){
+        for (Edge edge: graph.adj(i)){
+            int j = edge.either();
             if (num[j] == -1){
                 ftr[j] = i;
                 DFS(graph, j);
